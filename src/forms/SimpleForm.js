@@ -1,5 +1,5 @@
 import React from 'react'
-import {Formik} from 'formik'
+import {Formik, ErrorMessage} from 'formik'
 
 const SimpleForm = () => {
     return (
@@ -22,9 +22,8 @@ const SimpleForm = () => {
                 }
                 return errors
             }}
-        >
-        {
-            ( { handleSubmit, handleChange, values, errors, handleBlur, touched, isSubmitting } ) => (
+
+            render= { ({handleSubmit, handleChange, values, errors, handleBlur, touched, isSubmitting}) => (
                 <form onSubmit={handleSubmit} >
                     <input onChange={handleChange} 
                         value={values.name} 
@@ -36,17 +35,11 @@ const SimpleForm = () => {
                     
                     <button disabled={isSubmitting}>Submit</button> 
 
-                    {
-                        errors.name && (
-                            <div style={{ color: 'red' }}>
-                                {errors.name}
-                            </div>
-                        )
-                    }
+                    <ErrorMessage name="name" />
+
                 </form>
-            )
-        }
-        </Formik>
+            )}
+        />
     )
 }
 
